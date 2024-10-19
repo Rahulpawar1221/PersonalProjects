@@ -1,0 +1,104 @@
+package com.tka.OrganizationWorkFlow.controller;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.OrganizationWorkFlow.entity.Country;
+import com.tka.OrganizationWorkFlow.entity.Employee;
+import com.tka.OrganizationWorkFlow.service.MainService;
+
+@CrossOrigin
+@RestController
+@RequestMapping("api")
+public class MainController {
+	@Autowired
+	MainService service;
+
+	@PostMapping("addcountry")
+	public String addCountry(@RequestBody Country c) {
+		String msg = service.addCountry(c);
+		return msg;
+	}
+	//--------------------------------------------------------------------------------------------------------
+	
+	@PutMapping("updatecountry/{id}")
+	public String updateCountry(@RequestBody Country c, @PathVariable int id) {
+		String str = service.updateCountry(c,id);
+		return str;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@DeleteMapping("deletecountry/{country_id}")
+	public String deleteCountry(@PathVariable int country_id) {
+		String str = service.deleteCountry(country_id);
+		return str;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@GetMapping("getallcountry")
+	public List<Country> getAllCountry(@RequestBody Country c) {
+		List<Country> list = service.getAllCountry(c);
+		return list;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@GetMapping("getcountrybyid/{country_id}")
+	public Country getParticularCountryById(@PathVariable int country_id) {
+		Country countryObj=service.getParticularCountryById(country_id);
+		return countryObj;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@PostMapping("addemployee")
+	public String addEmployee(@RequestBody Employee emp) {
+		String str = service.addEmployee(emp);
+		return str;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@PutMapping("updateemployee/{id}")
+	public String updateEmployee(@RequestBody Employee emp, @PathVariable int id) {
+		String str = service.updateEmployee(emp,id);
+		return str;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@DeleteMapping("deleteemp/{id}")
+	public String deleteEmployee(@PathVariable int id) {
+		String msg=service.deleteEmployee(id);
+		return msg;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@GetMapping("getallemployees")
+	public List<Employee> getAllEmployees(){
+		List<Employee> list = service.getAllEmployees();
+		return list;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@GetMapping("getparticularemprecordbyid/{id}")
+	public Employee getParticularRecordById(@PathVariable int id) {
+		Employee emp = service.getParticularRecordById(id);
+		return emp;
+	}
+	//--------------------------------------------------------------------------------------------------------
+
+	@PostMapping("login")
+	public HashMap login(@RequestBody Employee e) {
+		HashMap map = service.login(e);
+		return map;
+	}
+	
+}

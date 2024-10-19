@@ -1,0 +1,5 @@
+package com.tka.OrganizationWorkFlow.entity;
+
+public class Employee {
+
+}
